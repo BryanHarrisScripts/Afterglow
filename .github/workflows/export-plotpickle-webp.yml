@@ -1,0 +1,43 @@
+name: Export PlotPickle WebP storyboard assets
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install WebP encoder
+        run: sudo apt-get update && sudo apt-get install -y webp
+      - name: Convert the first four available frames in every Block
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p plotpickle-afterglow-webp
+          for block in $(seq 1 24); do
+            source_dir="Afterglow Storyboard Blocks/Block_${block}/Frames"
+            [ -d "${source_dir}" ] || continue
+            mini=1
+            while IFS= read -r source; do
+              [ "${mini}" -le 4 ] || break
+              target=$(printf "plotpickle-afterglow-webp/block-%02d-mini-%d.webp" "${block}" "${mini}")
+              cwebp -quiet -q 80 -resize 1280 0 "${source}" -o "${target}"
+              printf '%s\t%s\n' "${target#plotpickle-afterglow-webp/}" "${source}" >> plotpickle-afterglow-webp/SOURCES.tsv
+              mini=$((mini + 1))
+            done < <(find "${source_dir}" -maxdepth 1 -type f -iname '*.png' -print | sort -V)
+          done
+          printf 'Converted assets: '
+          find plotpickle-afterglow-webp -type f -name '*.webp' | wc -l
+      - name: Upload converted assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: plotpickle-afterglow-webp
+          path: plotpickle-afterglow-webp
+          if-no-files-found: error
+          compression-level: 0
