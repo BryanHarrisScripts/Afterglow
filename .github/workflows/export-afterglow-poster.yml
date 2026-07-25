@@ -1,0 +1,32 @@
+name: Export Afterglow poster
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Sharp
+        run: npm install --no-save sharp@0.34.3
+      - name: Convert and verify poster
+        run: node scripts/export-afterglow-poster.mjs
+      - name: Verify three derivatives and manifest
+        shell: bash
+        run: |
+          test -f plotpickle-poster-export/full/afterglow-draft-poster-2023.webp
+          test -f plotpickle-poster-export/cards/afterglow-draft-poster-2023.webp
+          test -f plotpickle-poster-export/thumbs/afterglow-draft-poster-2023.webp
+          test -f plotpickle-poster-export/afterglow-draft-poster-2023.manifest.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: afterglow-draft-poster-2023-webp
+          path: plotpickle-poster-export
