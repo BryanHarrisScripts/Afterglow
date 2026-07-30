@@ -1,0 +1,40 @@
+{
+  "$schema": "https://plotpickle.org/schemas/github-story-project/1.1/manifest.schema.json",
+  "format": "plotpickle-story-project",
+  "formatVersion": "1.1.0",
+  "schemaVersion": "2.3.0",
+  "projectId": "6b7f34aa-2d36-483b-8aae-6e1df80eed2d",
+  "title": "Afterglow-Echoes-of-Sentience",
+  "createdAt": "2026-07-30T12:06:49.884Z",
+  "updatedAt": "2026-07-30T12:06:49.884Z",
+  "createdWith": "PlotPickle 1.0.0-rc.3",
+  "repository": {
+    "owner": "BryanHarrisScripts",
+    "name": "Afterglow-Echoes-of-Sentience",
+    "defaultBranch": "main"
+  },
+  "canonicalProject": {
+    "mode": "modular-folder",
+    "root": "project",
+    "manifestPath": "project/manifest.json",
+    "format": "plotpickle-project",
+    "formatVersion": "2.3.0"
+  },
+  "portableProject": {
+    "path": "stories/afterglow-reflections-of-sentience.ppf",
+    "role": "exchange-snapshot",
+    "legacyCanonicalPath": "stories/afterglow-reflections-of-sentience.ppf"
+  },
+  "modularProject": {
+    "format": "plotpickle-project",
+    "formatVersion": "2.3.0",
+    "root": "project",
+    "manifestPath": "project/manifest.json",
+    "status": "active"
+  },
+  "collaboration": {
+    "approvalAuthority": "project-lead",
+    "proposalMode": "pull-request",
+    "acceptingProposals": true
+  }
+}
