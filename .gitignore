@@ -1,12 +1,32 @@
+# Operating-system and editor files
 .DS_Store
 Thumbs.db
 *.tmp
+
+# Local logs and generated exports
 *.log
+/exports/*.zip
+/backups/
+/logs/
+
+# Local PlotPickle state and user-specific material
+/.plotpickle/
+/user-data/
+/credentials/
+
+# Local dependencies
+/node_modules/
+
+# Environment files and credentials
 .env
 .env.*
+!.env.example
+credentials.json
 *.key
 *.pem
-.plotpickle/
-credentials/
-node_modules/
-exports/*.zip
+*.pfx
+*.p12
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
