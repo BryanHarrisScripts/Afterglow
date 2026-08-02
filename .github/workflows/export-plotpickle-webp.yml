@@ -12,7 +12,7 @@ jobs:
   export:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: Install WebP encoder
         run: sudo apt-get update && sudo apt-get install -y webp
       - name: Convert the first four available frames in every Block
@@ -35,7 +35,7 @@ jobs:
           printf 'Converted assets: '
           find plotpickle-afterglow-webp -type f -name '*.webp' | wc -l
       - name: Upload converted assets
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: plotpickle-afterglow-webp
           path: plotpickle-afterglow-webp
